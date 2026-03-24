@@ -1,0 +1,109 @@
+###Test
+http://localhost:4004/odata/v4/Myservice/demo(name='Minion')
+###
+http://localhost:4004/odata/v4/CatalogService
+###
+http://localhost:4004/odata/v4/CatalogService/Currencies
+Authorization: Basic karthik1:Welcome123
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet;
+Authorization: Basic karthik1:Welcome123
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,nameLast,sex,email
+###
+://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2&$skip=0
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSethttp
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2&$skip=0
+Authorization: Basic karthik1:Welcome123
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C197A7FB
+###74867AD200E41EDBA5D8B06885AE0052
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/(ID='02BD2137-0890-1EEA-A6C2-BB55C197A7FB')
+###
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'&top=2&skip=0
+###
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+###
+http://localhost:4004/odata/v4/CDSService/ProductSet/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+###
+http://localhost:4004/odata/v4/CDSService/ProductSet/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items($filter=TaxAmount le 500)
+###
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Authorization: Basic karthik1:Welcome123
+Content-Type: application/json
+
+    {
+      "nameFirst": "Karthik",
+      "nameMiddle": null,
+      "nameLast": "KS",
+      "nameInitials": null,
+      "sex": "M",
+      "language": "E",
+      "phoneNumber": "+1 224 374 524",
+      "email": "karthik.ks@itelo.info",
+      "loginName": "KS",
+      "Currency_code": "USD",
+      "salaryAmount": 1000001,
+      "accountNumber": "111222333",
+      "bankId": "5100006",
+      "bankName": "My Bank of USA"
+    }
+###
+    PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/4f5508dc-4e8d-42d2-8c6b-c69201d6aca8
+Content-Type: application/json
+
+{
+    "salaryAmount": 1999999
+}
+###
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/4f5508dc-4e8d-42d2-8c6b-c69201d6aca8
+###
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+Content-Type: application/json
+
+{
+  "CURRENCY_code": "EUR",
+  "GROSS_AMOUNT": 4467.94,
+  "NET_AMOUNT": 3754.57,
+  "TAX_AMOUNT": 713.37,
+  "NODE_KEY": "74867AD200E41EDBA5D8B0C98DC98667",
+  "PO_ID": "300055555",
+  "PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885AB8052",
+  "LIFECYCLE_STATUS": "N",
+  "OVERALL_STATUS": "P",
+  "NOTE": "Example for Deep Insert",
+  "Items": [
+    {
+      "CURRENCY_code": "ARS",
+      "GROSS_AMOUNT": 154.7,
+      "NET_AMOUNT": 130,
+      "TAX_AMOUNT": 24.7,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35Z0053",
+      "PO_ITEM_POS": 10,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F60052"
+    },
+    {
+      "CURRENCY_code": "ARS",
+      "GROSS_AMOUNT": 402.22,
+      "NET_AMOUNT": 338,
+      "TAX_AMOUNT": 64.22,
+      "NODE_KEY": "74867AD200E41EDBA5D8B0CBD35Z2054",
+      "PO_ITEM_POS": 20,
+      "PRODUCT_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06B26F06052"
+    }
+  ]
+}
+###
+http://localhost:4004/odata/v4/CatalogService/getLargestOrder()
+###
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+###
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC28052/boost
+###
+http://localhost:4004/odata/v2/CatalogService/EmployeeSet?$select=ID,nameFirst,nameLast,sex,email
+###
+http://localhost:4004/odata/v4/CDSService/ProductSet
+###
+http://localhost:4004/odata/v4/CatalogService

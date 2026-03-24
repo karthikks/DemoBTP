@@ -1,0 +1,27 @@
+{
+ "welcomeFile": "purchaseorder/webapp/index.html",
+ "authenticationMethod": "route",
+ "sessionTimeout": 10,
+ "routes": [
+  {
+   "source": "^/purchaseorder/webapp/(.*)",
+   "localDir": "purchaseorder/webapp/",
+   "target": "$1",
+   "authenticationType": "xsuaa",
+   "csrfProtection": true
+  },
+  {
+   "source": "^/user-api/currentUser$",
+   "target": "/currentUser",
+   "service": "sap-approuter-userapi"
+  },
+  {
+   "source": "^/(.*)$",
+   "destination": "srv-api"
+  }
+ ],
+ "logout": {
+  "logoutEndpoint": "/logout",
+  "logoutPage": "https://www.google.com"
+ }
+}

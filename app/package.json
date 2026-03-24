@@ -1,0 +1,19 @@
+{
+  "name": "mycapapp-ui",
+  "version": "1.0.0",
+  "description": "My Capp App demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Capp",
+    "App"
+  ],
+  "author": "Karthik K S",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/approuter": "^21.1.0"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "myCappApp",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.15.9",
+    "@cap-js/hana": "^2",
+    "@sap/cds": "^9",
+    "express": "^4",
+    "@sap/xssec": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds-dk": "^9",
+    "cds-plugin-ui5": "^0.13.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-purchaseorder": "cds watch --open demo.purchaseorder/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/purchaseorder"
+  ],
+  "cds": {
+    "requires": {
+      "auth": {
+        "[development]": {
+          "kind": "mocked",
+          "users": {
+            "karthik": {
+              "password": "Welcome123",
+              "roles": [
+                "Viewer"
+              ],
+              "attr": {
+                "Bank": [
+                  "My Bank of London"
+                ]
+              }
+            },
+            "karthik1": {
+              "password": "Welcome123",
+              "roles": [
+                "Editor"
+              ]
+            }
+          }
+        },
+        "[production]": {
+          "kind": "xsuaa"
+        }
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      }
+    }
+  }
+}

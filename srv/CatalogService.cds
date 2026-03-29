@@ -1,10 +1,10 @@
 using { index.db.master,index.db.transaction } from '../db/datamodel';
 service CatalogService@(path:'Catalogservice',requires:'authenticated-user') {
 entity EmployeeSet @(restrict :[
-                                {grant : ['READ'], to: 'Viewer',
+                                {grant : ['READ'], to: 'Display',
                                     //row level security
                                     where :'bankName = $user.Bank'},
-                                {grant : ['WRITE', 'DELETE'], to: 'Editor'}
+                                {grant : ['WRITE', 'DELETE'], to: 'Edit'}
                               ])  as projection on master.employees;
 entity ProductSet as projection on master.product;
 entity BusinessPartnerSet as projection on master.businesspartner;
@@ -13,8 +13,8 @@ entity AddressSet as projection on master.address;
 entity StatusCode as projection on master.StatusCode;
 //@Capabilities:{ Deletable : false }
 entity PurchaseOrderSet @(
-                            restrict:[ {grant: ['READ'], to:'Viewer'},
-                                       {grant: ['WRITE','DELETE'],  to:'Editor'} ],
+                            restrict:[ {grant: ['READ'], to:'Display'},
+                                       {grant: ['WRITE','DELETE'],  to:'Edit'} ],
                           odata.draft.enabled:true, 
                           Common.DefaultValuesFunction: 'getDefaultValue' ) as projection on transaction.purchaseorder
 {

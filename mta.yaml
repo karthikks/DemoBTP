@@ -50,7 +50,7 @@ modules:
         builder: npm-ci
     requires:
       - name: myCappApp-auth
-      # - name: srv-api
+    # - name: srv-api
       - name: srv-api 
         group: destinations
         properties:

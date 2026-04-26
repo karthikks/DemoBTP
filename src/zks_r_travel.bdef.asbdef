@@ -1,0 +1,83 @@
+managed
+implementation in class zbp_ks_r_travel unique;
+strict ( 2 );
+
+define behavior for ZKS_R_TRAVEL alias travel
+persistent table /dmo/travel_m
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+  //field ( readonly ) TravelId;
+  association _booking { create; }
+  mapping for /dmo/travel_m
+    {
+      AgencyId      = agency_id;
+      TravelId      = travel_id;
+      BeginDate     = begin_date;
+      BookingFee    = booking_fee;
+      OverallStatus = overall_status;
+      EndDate = end_date;
+      TotalPrice = total_price;
+      CreatedAt     = created_at;
+      CreatedBy     = created_by;
+      LastChangedAt = last_changed_at;
+      LastChangedBy = last_changed_by;
+      CurrencyCode  = currency_code;
+      CustomerId    = customer_id;
+      Description   = description;
+    }
+}
+
+define behavior for ZKS_BOOKING alias Booking
+persistent table /dmo/booking_m
+lock dependent by _travel
+authorization dependent by _travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId;
+  association _travel;
+  association _suppl { create; }
+  mapping for /dmo/booking_m
+    {
+      BookingDate   = booking_date;
+      BookingId     = booking_id;
+      BookingStatus = booking_status;
+      CarrierId     = carrier_id;
+      ConnectionId  = connection_id;
+      CurrencyCode  = currency_code;
+      CustomerId    = customer_id;
+      FlightDate    = flight_date;
+      FlightPrice   = flight_price;
+      LastChangedAt = last_changed_at;
+      TravelId      = travel_id;
+    }
+}
+
+define behavior for ZKS_BOOKING_SUPPL alias BookSuppl
+persistent table /dmo/booksuppl_m
+lock dependent by _travel
+authorization dependent by _travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId;
+  association _travel;
+  association _booking;
+  mapping for /dmo/booksuppl_m
+    {
+      BookingId           = booking_id;
+      BookingSupplementId = booking_supplement_id;
+      CurrencyCode        = currency_code;
+      LastChangedAt       = last_changed_at;
+      Price               = price;
+      SupplementId        = supplement_id;
+      TravelId            = travel_id;
+    }
+}

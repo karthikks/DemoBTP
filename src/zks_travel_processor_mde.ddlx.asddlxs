@@ -1,0 +1,109 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo:{ typeName: 'Travel Request',
+typeNamePlural: 'Travel Requests',
+ title:{ value: 'TravelId' },
+ description:{ value :'Description' }
+ }
+annotate entity ZKS_TRAVEL_PROCESSOR with
+{
+  @UI.facet: [{ purpose: #HEADER,
+  id: 'TravelHeaderPrice',
+  type: #DATAPOINT_REFERENCE,
+  position: 10,
+  targetQualifier: 'TravelHeader'
+   },
+   {
+  id: 'TravelStatus',
+  type: #DATAPOINT_REFERENCE,
+  position: 20,
+  targetQualifier: 'TravelHeader1'
+   },
+  {
+  purpose: #STANDARD,
+  type:#COLLECTION,
+  id:'GeneralInfo',
+  position: 10,
+  label:'General Info'
+  },
+  {
+  purpose: #STANDARD,
+  type:#IDENTIFICATION_REFERENCE,
+  id:'basic',
+  label:'Basic Data',
+  parentId: 'GeneralInfo',
+  position: 10
+  },
+  {
+  purpose: #STANDARD,
+  type:#FIELDGROUP_REFERENCE,
+  id:'dates',
+  label:'Travel Dates',
+  parentId: 'GeneralInfo',
+  position: 20,
+  targetQualifier: 'FG_TarvelDates'
+  },
+   {
+  purpose: #STANDARD,
+  type:#FIELDGROUP_REFERENCE,
+  id:'prices',
+  label:'Costs',
+  parentId: 'GeneralInfo',
+  position: 30,
+  targetQualifier: 'FG_TarvelCosts'
+  },
+   {
+  purpose: #STANDARD,
+  type:#LINEITEM_REFERENCE,
+  id:'items',
+  label:'Bookings',
+  position: 20,
+  targetElement: '_booking'
+  }
+   ]
+  @UI.selectionField: [{ position: 10  }]
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  TravelId;
+  @UI.identification: [{ position: 20 }]
+  Description;
+  @UI.lineItem: [{ position: 20 }]
+  @UI.selectionField: [{ position: 20  }]
+  @UI.identification: [{ position: 30 }]
+  AgencyId;
+  @UI.lineItem: [{ position: 30 }]
+  @UI.selectionField: [{ position: 30  }]
+  @UI.identification: [{ position: 40 }]
+  CustomerId;
+  @UI.lineItem: [{ position: 40 }]
+  @UI.selectionField: [{ position: 30  }]
+  @UI.fieldGroup: [{ position: 10, qualifier: 'FG_TarvelDates' }]
+  BeginDate;
+  @UI.fieldGroup: [{ position: 20, qualifier: 'FG_TarvelDates' }]
+  EndDate;
+  @UI.fieldGroup: [{ position: 10, qualifier: 'FG_TarvelCosts' }]
+  BookingFee;
+  @UI.lineItem: [{ position: 50 }]
+  @UI.selectionField: [{ position: 40  }]
+  @UI.dataPoint:{ qualifier: 'TravelHeader',title: 'Total Price' }
+  @UI.fieldGroup: [{ position: 20, qualifier: 'FG_TarvelCosts' }]
+  TotalPrice;
+  @UI.fieldGroup: [{ position: 30, qualifier: 'FG_TarvelCosts' }]
+  CurrencyCode;
+
+  @UI.lineItem: [{ position: 60 , importance: #HIGH, criticality: 'statuscolor'}]
+  @UI.selectionField: [{ position: 40  }]
+  @UI.dataPoint:{ qualifier: 'TravelHeader1',title: 'Travel Status', criticality: 'statuscolor' }
+  @UI.fieldGroup: [{ position: 20, qualifier: 'FG_TarvelDates' }]
+  OverallStatus;
+  //    CreatedBy;
+  //    CreatedAt;
+  //    LastChangedBy;
+  //    LastChangedAt;
+  /* Associations */
+  //    _agency;
+  //    _booking;
+  //    _currency;
+  //    _customer;
+  //    _OverallStatus;
+
+}
